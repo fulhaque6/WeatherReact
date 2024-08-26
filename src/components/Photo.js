@@ -17,8 +17,9 @@ function Photo(props) {
     return (
       <img
         src={photoUrl}
-        className="rounded mx-auto d-block"
+        className="img-fluid"
         alt={props.getCity ? props.getCity : "City"}
+        style={{ marginLeft: "120px" }}
       />
     );
 }
