@@ -28,6 +28,7 @@
   color: #61dafb;
 }
 
+/* New styles */
 .app-container {
   background-image: url('images/bg.jpg');
   background-size: cover;
@@ -37,14 +38,41 @@
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+.search-container {
+  width: 100%;
+  max-width: 600px; /* Optional: set a max width to avoid the input being too wide on large screens */
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Make sure it's above other elements */
+}
+
+/* Ensure search input container is responsive */
+@media (max-width: 768px) {
+  .search-container {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+}
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }

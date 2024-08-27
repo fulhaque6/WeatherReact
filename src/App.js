@@ -126,11 +126,12 @@ function App() {
         showWeather={showWeather}
         getCurrentLocation={getCurrentLocation}
       />
-      <WeatherData
-        getCity={countryName}
-        getWeatherData={getWeatherData}
-      />
-      <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
+      {getCityName !== "" && (
+        <>
+          <WeatherData getCity={countryName} getWeatherData={getWeatherData} />
+          <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
+        </>
+      )}
     </div>
   );
 }

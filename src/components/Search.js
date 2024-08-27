@@ -1,10 +1,10 @@
 import Item from "./Item";
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Search(props) {
   let [getCitiesList, setCitiesList] = useState([]);
   let [inputValue, setInputValue] = useState("");
+  let [loading, setLoading] = useState(false); // Add loading state
 
   let getCitiesBySearch = (val) => {
     let citiesList = [];
@@ -22,6 +22,15 @@ function Search(props) {
 
   let handleItemClick = (city) => {
     setInputValue(city);
+  };
+
+  let handleLocationClick = async () => {
+    setLoading(true);
+    console.log("Loading state:", true); // Debugging line
+    setInputValue("");
+    await props.getCurrentLocation();
+    setLoading(false);
+    console.log("Loading state:", false); // Debugging line
   };
 
   return (
@@ -51,22 +60,27 @@ function Search(props) {
                   borderTopLeftRadius: "50px",
                   borderBottomLeftRadius: "50px",
                   padding: "10px 20px",
-                  backgroundColor: "#e0f7fa", // Sky-blue background
-                  color: "#0288d1", // Sky-blue text color
+                  backgroundColor: "#e0f7fa",
+                  color: "#0288d1",
                 }}
               />
               <span className="input-group-text bg-transparent border-0">
                 <i className="bi bi-geo-alt" style={{ color: "#0288d1" }}>
-                  <i className="fa-solid fa-location-dot"
-                  onClick={()=>{
-                    setInputValue("");
-                    props.getCurrentLocation();
-                  }}
+                  <i
+                    className="fa-solid fa-location-dot"
+                    onClick={handleLocationClick}
                   ></i>
                 </i>
               </span>
             </div>
           </div>
+          {loading && (
+            <div className="loading-overlay">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Searching...</span>
+              </div>
+            </div>
+          )}
           <ul className="list-group mt-3 rounded shadow-sm">
             {getCitiesList.map((name, i) => (
               <Item
