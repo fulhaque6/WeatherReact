@@ -4,6 +4,7 @@ import WeatherData from "./components/WeatherData";
 import Search from "./components/Search";
 import Photo from "./components/Photo";
 import Cities from "./utilities/Cities";
+import DeveloperInfo from "./components/DeveloperInfo";
 
 function App() {
   const apiKey = "bcab6e6950bd669881812038ba52d878&units";
@@ -14,6 +15,7 @@ function App() {
     description: "",
     humidity: "",
     windSpeed: "",
+    main: ""
   });
 
   const getWeatherApi = (city) => {
@@ -43,6 +45,7 @@ function App() {
           weather.weather[0].description,
           weather.main.humidity,
           weather.wind.speed,
+          weather.weather[0].main
         ];
         return allWeatherData;
       })
@@ -60,6 +63,7 @@ function App() {
           description: weather[1],
           humidity: weather[2],
           windSpeed: weather[3],
+          main: weather[4]
         });
       })
       .catch((error) => {
@@ -120,6 +124,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <DeveloperInfo/>
       <Search
         cities={Cities}
         setCityName={setCityName}

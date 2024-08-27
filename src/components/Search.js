@@ -1,10 +1,10 @@
-import Item from "./Item";
 import React, { useState } from "react";
+import Item from "./Item";
 
 function Search(props) {
   let [getCitiesList, setCitiesList] = useState([]);
   let [inputValue, setInputValue] = useState("");
-  let [loading, setLoading] = useState(false); // Add loading state
+  let [loading, setLoading] = useState(false);
 
   let getCitiesBySearch = (val) => {
     let citiesList = [];
@@ -26,20 +26,20 @@ function Search(props) {
 
   let handleLocationClick = async () => {
     setLoading(true);
-    console.log("Loading state:", true); // Debugging line
+    console.log("Loading state:", true);
     setInputValue("");
     await props.getCurrentLocation();
     setLoading(false);
-    console.log("Loading state:", false); // Debugging line
+    console.log("Loading state:", false);
   };
 
   return (
-    <div className="container d-flex justify-content-center">
-      <div className="row w-100 mt-5">
-        <div className="col-12 col-md-8 offset-md-2">
+    <div className="container" style={{ marginTop: "6rem" }}>
+      <div className="row justify-content-center">
+        <div className="col-md-8 col-lg-6">
           <div
             className="bg-light rounded-pill shadow-sm"
-            style={{ backgroundColor: "#e0f7fa" }} // Light sky-blue background
+            style={{ backgroundColor: "#e0f7fa" }}
           >
             <div className="input-group">
               <span className="input-group-text bg-transparent border-0">

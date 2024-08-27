@@ -1,35 +1,77 @@
-import React, { useEffect } from "react";
+import React from "react";
+import {
+  FaCloud,
+  FaCloudSun,
+  FaCloudMoon,
+  FaCloudShowersHeavy,
+  FaCloudSunRain,
+  FaSnowflake,
+  FaWind,
+  FaUmbrella,
+  FaBolt,
+  FaCloudBolt,
+  FaMeteor,
+  FaHail,
+} from "react-icons/fa";
 
 function WeatherData(props) {
+  const { temperature, description, humidity, windSpeed } =
+    props.getWeatherData || {};
+  const city = props.getCity || "Loading...";
+
+  const getWeatherIcon = (main, description) => {
+    switch (main) {
+      case "Clear":
+        return <FaCloudSun className="weather-icon" />;
+      case "Clouds":
+        if (description.includes("rain"))
+          return <FaCloudShowersHeavy className="weather-icon" />;
+        if (description.includes("drizzle"))
+          return <FaCloudShowersHeavy className="weather-icon" />;
+        if (description.includes("snow"))
+          return <FaCloudSunRain className="weather-icon" />;
+        return <FaCloud className="weather-icon" />;
+      case "Rain":
+        return <FaCloudShowersHeavy className="weather-icon" />;
+      case "Snow":
+        return <FaSnowflake className="weather-icon" />;
+      case "Thunderstorm":
+        return <FaBolt className="weather-icon" />;
+      case "Wind":
+        return <FaWind className="weather-icon" />;
+      default:
+        return <FaCloud className="weather-icon" />;
+    }
+  };
+
+  const weatherIcon = getWeatherIcon(props.getWeatherData.main, description);
+
   return (
-    <div className="container my-5">
+    <div className="container mt-3">
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
-          <div className="card text-center shadow-lg rounded">
+          <div className="card text-center shadow-lg rounded border-light">
             <div className="card-body p-4">
               <h2 id="cityName" className="card-title mb-4 text-primary">
-                {props.getCity ? (
-                  <div>{props.getCity}</div>
-                ) : (
-                  <div>Loading...</div>
-                )}
+                {city}
               </h2>
+              <div className="mb-3">{weatherIcon}</div>
               <p
                 id="temperature"
                 className="card-text display-4 text-dark mb-3"
               >
-                {props.getWeatherData.temperature}°C
+                {temperature}°C
               </p>
               <p id="weatherDescription" className="card-text text-muted mb-3">
-                {props.getWeatherData.description}
+                {description}
               </p>
               <div className="d-flex justify-content-around">
                 <p id="humidity" className="card-text">
-                  <strong>Humidity:</strong> {props.getWeatherData.humidity}%
+                  <strong>Humidity:</strong> {humidity}%
                 </p>
                 <p id="windSpeed" className="card-text">
-                  <strong>Wind Speed:</strong> {props.getWeatherData.windSpeed}{" "}
-                  km/h
+                  <FaWind className="me-2" />
+                  <strong>Wind Speed:</strong> {windSpeed} km/h
                 </p>
               </div>
             </div>
