@@ -57,7 +57,9 @@ function Search(props) {
               />
               <span className="input-group-text bg-transparent border-0">
                 <i className="bi bi-geo-alt" style={{ color: "#0288d1" }}>
-                  <i className="fa-solid fa-location-dot"></i>
+                  <i className="fa-solid fa-location-dot"
+                  onClick={props.getCurrentLocation}
+                  ></i>
                 </i>
               </span>
             </div>

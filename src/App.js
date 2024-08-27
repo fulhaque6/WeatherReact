@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import WeatherData from "./components/WeatherData";
 import Search from "./components/Search";
 import Photo from "./components/Photo";
+import Cities from "./utilities/Cities";
 
 function App() {
   const apiKey = "bcab6e6950bd669881812038ba52d878&units";
@@ -25,108 +26,7 @@ function App() {
     return `https://api.unsplash.com/search/photos?query=${city}&client_id=${apiKeyPhotos}`;
   };
 
-  const cities = [
-    "Lahore,Pakistan",
-    "Karachi,Pakistan",
-    "Islamabad,Pakistan",
-    "New York,United States",
-    "Los Angeles,United States",
-    "Chicago,United States",
-    "Houston,United States",
-    "Phoenix,United States",
-    "Philadelphia,United States",
-    "San Antonio,United States",
-    "San Diego,United States",
-    "Dallas,United States",
-    "London,United Kingdom",
-    "Manchester,United Kingdom",
-    "Birmingham,United Kingdom",
-    "Glasgow,United Kingdom",
-    "Tokyo,Japan",
-    "Osaka,Japan",
-    "Kyoto,Japan",
-    "Nagoya,Japan",
-    "Paris,France",
-    "Marseille,France",
-    "Lyon,France",
-    "Toulouse,France",
-    "Nice,France",
-    "Berlin,Germany",
-    "Munich,Germany",
-    "Frankfurt,Germany",
-    "Hamburg,Germany",
-    "Cologne,Germany",
-    "Sydney,Australia",
-    "Melbourne,Australia",
-    "Brisbane,Australia",
-    "Perth,Australia",
-    "Toronto,Canada",
-    "Vancouver,Canada",
-    "Montreal,Canada",
-    "Ottawa,Canada",
-    "Calgary,Canada",
-    "Beijing,China",
-    "Shanghai,China",
-    "Guangzhou,China",
-    "Shenzhen,China",
-    "Chengdu,China",
-    "Moscow,Russia",
-    "Saint Petersburg,Russia",
-    "Novosibirsk,Russia",
-    "Yekaterinburg,Russia",
-    "Nizhny Novgorod,Russia",
-    "Rio de Janeiro,Brazil",
-    "São Paulo,Brazil",
-    "Brasília,Brazil",
-    "Salvador,Brazil",
-    "Fortaleza,Brazil",
-    "Mexico City,Mexico",
-    "Guadalajara,Mexico",
-    "Monterrey,Mexico",
-    "Puebla,Mexico",
-    "Tijuana,Mexico",
-    "Cairo,Egypt",
-    "Alexandria,Egypt",
-    "Giza,Egypt",
-    "Shubra El-Kheima,Egypt",
-    "Port Said,Egypt",
-    "Cape Town,South Africa",
-    "Johannesburg,South Africa",
-    "Durban,South Africa",
-    "Pretoria,South Africa",
-    "Port Elizabeth,South Africa",
-    "Dubai,United Arab Emirates",
-    "Abu Dhabi,United Arab Emirates",
-    "Sharjah,United Arab Emirates",
-    "Al Ain,United Arab Emirates",
-    "Fujairah,United Arab Emirates",
-    "Buenos Aires,Argentina",
-    "Córdoba,Argentina",
-    "Rosario,Argentina",
-    "Mendoza,Argentina",
-    "La Plata,Argentina",
-    "Istanbul,Turkey",
-    "Ankara,Turkey",
-    "Izmir,Turkey",
-    "Bursa,Turkey",
-    "Adana,Turkey",
-    "Seoul,South Korea",
-    "Busan,South Korea",
-    "Incheon,South Korea",
-    "Daegu,South Korea",
-    "Daejeon,South Korea",
-    "Bangkok,Thailand",
-    "Chiang Mai,Thailand",
-    "Phuket,Thailand",
-    "Pattaya,Thailand",
-    "Udon Thani,Thailand",
-    "Rome,Italy",
-    "Milan,Italy",
-    "Naples,Italy",
-    "Turin,Italy",
-    "Palermo,Italy",
-  ];
-  cities.sort();
+  Cities.sort();
 
   const getWeather = (val) => {
     return fetch(getWeatherApi(val))
@@ -169,7 +69,7 @@ function App() {
 
   const getCountryName = () => {
     if (getCityName) {
-      return cities.find((city) => {
+      return Cities.find((city) => {
         let cityInLoweCase = city.toLowerCase();
         let getSettedCity = getCityName.toLowerCase();
         return cityInLoweCase.includes(getSettedCity);
@@ -178,19 +78,56 @@ function App() {
     return null;
   };
   const countryName = getCountryName();
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
+
+  function successCallback(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    getCurrentCity(latitude, longitude);
+  }
+
+  function errorCallback(error) {
+    console.error("Error occurred while retrieving location:", error);
+  }
+
+  const getCurrentCity = (latitude, longitude) => {
+    fetch(getGeolocationApi(latitude, longitude))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Geolocation API error: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((cityData) => {
+        if (cityData.length > 0) {
+          let city = cityData[0].name.split(" ")[0];
+          setCityName(city);
+          showWeather(city);
+        } else {
+          throw new Error("No city data found.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error in getCurrentCity:", error);
+      });
+  };
 
   return (
     <div className="app-container">
       <Search
-        cities={cities}
+        cities={Cities}
         setCityName={setCityName}
         showWeather={showWeather}
+        getCurrentLocation={getCurrentLocation}
       />
       <WeatherData
         getCity={countryName}
-        setCityName={setCityName}
-        showWeather={showWeather}
-        geolocationApi={getGeolocationApi}
         getWeatherData={getWeatherData}
       />
       <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
