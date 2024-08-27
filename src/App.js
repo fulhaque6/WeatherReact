@@ -180,7 +180,7 @@ function App() {
   const countryName = getCountryName();
 
   return (
-    <>
+    <div className="app-container">
       <Search
         cities={cities}
         setCityName={setCityName}
@@ -194,7 +194,7 @@ function App() {
         getWeatherData={getWeatherData}
       />
       <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
-    </>
+    </div>
   );
 }
 

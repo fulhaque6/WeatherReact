@@ -25,8 +25,8 @@ function Search(props) {
   };
 
   return (
-    <div className="container mt-5 d-flex justify-content-center">
-      <div className="row w-100">
+    <div className="container d-flex justify-content-center">
+      <div className="row w-100 mt-5">
         <div className="col-12 col-md-8 offset-md-2">
           <div
             className="bg-light rounded-pill shadow-sm"
@@ -35,7 +35,7 @@ function Search(props) {
             <div className="input-group">
               <span className="input-group-text bg-transparent border-0">
                 <i className="bi bi-search" style={{ color: "#0288d1" }}>
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                 </i>
               </span>
               <input
@@ -57,7 +57,7 @@ function Search(props) {
               />
               <span className="input-group-text bg-transparent border-0">
                 <i className="bi bi-geo-alt" style={{ color: "#0288d1" }}>
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i className="fa-solid fa-location-dot"></i>
                 </i>
               </span>
             </div>
