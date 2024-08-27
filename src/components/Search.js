@@ -1,5 +1,6 @@
 import Item from "./Item";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Search(props) {
   let [getCitiesList, setCitiesList] = useState([]);
@@ -25,43 +26,56 @@ function Search(props) {
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <ul
-        className="list-group"
-        style={{
-          width: "400px", 
-          position: "fixed", 
-          top: "150px", 
-          left: "50%", 
-          transform: "translateX(-50%)", 
-        }}
-      >
-        <li className="list-group-item">
-          <div className="input-group">
-            <input
-              value={inputValue}
-              onChange={(event) => {
-                getCitiesBySearch(event.target.value);
-              }}
-              type="text"
-              className="form-control"
-              placeholder="Search..."
-              aria-label="Search"
-            />
+      <div className="row w-100">
+        <div className="col-12 col-md-8 offset-md-2">
+          <div
+            className="bg-light rounded-pill shadow-sm"
+            style={{ backgroundColor: "#e0f7fa" }} // Light sky-blue background
+          >
+            <div className="input-group">
+              <span className="input-group-text bg-transparent border-0">
+                <i className="bi bi-search" style={{ color: "#0288d1" }}>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </i>
+              </span>
+              <input
+                value={inputValue}
+                onChange={(event) => {
+                  getCitiesBySearch(event.target.value);
+                }}
+                type="text"
+                className="form-control border-0 rounded-pill"
+                placeholder="Search for a city..."
+                aria-label="Search"
+                style={{
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  padding: "10px 20px",
+                  backgroundColor: "#e0f7fa", // Sky-blue background
+                  color: "#0288d1", // Sky-blue text color
+                }}
+              />
+              <span className="input-group-text bg-transparent border-0">
+                <i className="bi bi-geo-alt" style={{ color: "#0288d1" }}>
+                  <i class="fa-solid fa-location-dot"></i>
+                </i>
+              </span>
+            </div>
           </div>
-        </li>
-        {getCitiesList.map((name, i) => {
-          return (
-            <Item
-              key={i}
-              city={name}
-              onClick={handleItemClick}
-              citiesList={setCitiesList}
-              setCityName={props.setCityName}
-              showWeather={props.showWeather}
-            />
-          );
-        })}
-      </ul>
+          <ul className="list-group mt-3 rounded shadow-sm">
+            {getCitiesList.map((name, i) => (
+              <Item
+                key={i}
+                city={name}
+                onClick={handleItemClick}
+                citiesList={setCitiesList}
+                setCityName={props.setCityName}
+                showWeather={props.showWeather}
+              />
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

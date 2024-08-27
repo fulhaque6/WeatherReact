@@ -46,29 +46,35 @@ function WeatherData(props) {
   };
   return (
     <div className="container my-5">
-      <div className="row">
-        <div className="col-md-6 col-lg-4">
-          <div className="card text-center shadow-sm">
-            <div className="card-body">
-              <h2 id="cityName" className="card-title mb-3">
+      <div className="row justify-content-center">
+        <div className="col-md-8 col-lg-6">
+          <div className="card text-center shadow-lg rounded">
+            <div className="card-body p-4">
+              <h2 id="cityName" className="card-title mb-4 text-primary">
                 {props.getCity ? (
                   <div>{props.getCity}</div>
                 ) : (
                   <div>Loading...</div>
                 )}
               </h2>
-              <p id="temperature" className="card-text lead">
-                Temperature: {props.getWeatherData.temperature}°C
+              <p
+                id="temperature"
+                className="card-text display-4 text-dark mb-3"
+              >
+                {props.getWeatherData.temperature}°C
               </p>
-              <p id="weatherDescription" className="card-text">
-                Description: {props.getWeatherData.description}
+              <p id="weatherDescription" className="card-text text-muted mb-3">
+                {props.getWeatherData.description}
               </p>
-              <p id="humidity" className="card-text">
-                Humidity: {props.getWeatherData.humidity}%
-              </p>
-              <p id="windSpeed" className="card-text">
-                Wind Speed: {props.getWeatherData.windSpeed} km/h
-              </p>
+              <div className="d-flex justify-content-around">
+                <p id="humidity" className="card-text">
+                  <strong>Humidity:</strong> {props.getWeatherData.humidity}%
+                </p>
+                <p id="windSpeed" className="card-text">
+                  <strong>Wind Speed:</strong> {props.getWeatherData.windSpeed}{" "}
+                  km/h
+                </p>
+              </div>
             </div>
           </div>
         </div>

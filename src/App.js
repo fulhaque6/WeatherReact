@@ -7,7 +7,7 @@ import Photo from "./components/Photo";
 function App() {
   const apiKey = "bcab6e6950bd669881812038ba52d878&units";
   const apiKeyPhotos = "Yjwb6QtX8g8kasCa40i4cqGP5H0kVEkcRH-mDS7Irf4";
-  let [getCityName,setCityName] = useState("");
+  let [getCityName, setCityName] = useState("");
   let [getWeatherData, setWeatherData] = useState({
     temperature: "",
     description: "",
@@ -166,23 +166,34 @@ function App() {
         console.error("Error in showWeather:", error);
       });
   };
-  
+
   const getCountryName = () => {
     if (getCityName) {
-      return cities.find((city) =>{ 
+      return cities.find((city) => {
         let cityInLoweCase = city.toLowerCase();
         let getSettedCity = getCityName.toLowerCase();
-        return cityInLoweCase.includes(getSettedCity)});
+        return cityInLoweCase.includes(getSettedCity);
+      });
     }
     return null;
   };
   const countryName = getCountryName();
- 
+
   return (
     <>
-      <WeatherData getCity={countryName} setCityName={setCityName} showWeather={showWeather} geolocationApi={getGeolocationApi} getWeatherData={getWeatherData}/>
-      <Search cities={cities} setCityName={setCityName} showWeather={showWeather}/>
-      <Photo cityPhoto={getCityPhotoLink} getCity={getCityName}/>
+      <Search
+        cities={cities}
+        setCityName={setCityName}
+        showWeather={showWeather}
+      />
+      <WeatherData
+        getCity={countryName}
+        setCityName={setCityName}
+        showWeather={showWeather}
+        geolocationApi={getGeolocationApi}
+        getWeatherData={getWeatherData}
+      />
+      <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
     </>
   );
 }
