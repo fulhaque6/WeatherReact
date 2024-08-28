@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 
-function DeveloperInfo() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+function DeveloperInfo(props) {
 
   const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
+    props.setIsDarkMode((prevMode) => !prevMode);
   };
 
   return (
     <div
       className={`developer-info-container ${
-        isDarkMode ? "dark-mode" : "light-mode"
+        props.isDarkMode ? "dark-mode" : "light-mode"
       }`}
     >
       <div className="github-link-container">
@@ -25,7 +24,7 @@ function DeveloperInfo() {
       </div>
       <div className="theme-toggle-container">
         <label className="theme-toggle-switch">
-          <input type="checkbox" checked={isDarkMode} onChange={toggleTheme} />
+          <input type="checkbox" checked={props.isDarkMode} onChange={toggleTheme} />
           <span className="slider"></span>
         </label>
       </div>

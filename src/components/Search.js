@@ -25,6 +25,7 @@ function Search(props) {
   };
 
   let handleLocationClick = async () => {
+    setCitiesList([]);
     setLoading(true);
     console.log("Loading state:", true);
     setInputValue("");
@@ -34,7 +35,10 @@ function Search(props) {
   };
 
   return (
-    <div className="container" style={{ marginTop: "6rem" }}>
+    <div
+      className={`container ${props.isDarkMode ? "dark-mode" : "light-mode"}`}
+      style={{ marginTop: "6rem" }}
+    >
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div
@@ -43,7 +47,7 @@ function Search(props) {
           >
             <div className="input-group">
               <span className="input-group-text bg-transparent border-0">
-                <i className="bi bi-search" style={{ color: "#0288d1" }}>
+                <i className="bi bi-search">
                   <i className="fa-solid fa-magnifying-glass"></i>
                 </i>
               </span>
@@ -65,7 +69,7 @@ function Search(props) {
                 }}
               />
               <span className="input-group-text bg-transparent border-0">
-                <i className="bi bi-geo-alt" style={{ color: "#0288d1" }}>
+                <i className="bi bi-geo-alt">
                   <i
                     className="fa-solid fa-location-dot"
                     onClick={handleLocationClick}

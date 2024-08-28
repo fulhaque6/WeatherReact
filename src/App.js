@@ -17,6 +17,8 @@ function App() {
     windSpeed: "",
     main: ""
   });
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
 
   const getWeatherApi = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -124,16 +126,17 @@ function App() {
 
   return (
     <div className="app-container">
-      <DeveloperInfo/>
+      <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode}/>
       <Search
         cities={Cities}
         setCityName={setCityName}
         showWeather={showWeather}
         getCurrentLocation={getCurrentLocation}
+        isDarkMode={isDarkMode}
       />
       {getCityName !== "" && (
         <>
-          <WeatherData getCity={countryName} getWeatherData={getWeatherData} />
+          <WeatherData getCity={countryName} getWeatherData={getWeatherData}  isDarkMode={isDarkMode}/>
           <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
         </>
       )}

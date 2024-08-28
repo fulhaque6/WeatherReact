@@ -47,22 +47,26 @@ function WeatherData(props) {
   const weatherIcon = getWeatherIcon(props.getWeatherData.main, description);
 
   return (
-    <div className="container mt-3">
+    <div
+      className={`container mt-3 ${
+        props.isDarkMode ? "dark-mode" : "light-mode"
+      }`}
+    >
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="card text-center shadow-lg rounded border-light">
             <div className="card-body p-4">
-              <h2 id="cityName" className="card-title mb-4 text-primary">
+              <h2 id="cityName" className="card-title mb-4">
                 {city}
               </h2>
               <div className="mb-3">{weatherIcon}</div>
               <p
                 id="temperature"
-                className="card-text display-4 text-dark mb-3"
+                className="card-text display-4 mb-3"
               >
                 {temperature}°C
               </p>
-              <p id="weatherDescription" className="card-text text-muted mb-3">
+              <p id="weatherDescription" className="card-text mb-3">
                 {description}
               </p>
               <div className="d-flex justify-content-around">
