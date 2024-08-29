@@ -48,9 +48,7 @@ function WeatherData(props) {
 
   return (
     <div
-      className={`container mt-3 ${
-        props.isDarkMode ? "dark-mode" : "light-mode"
-      }`}
+      className={`container mt-3`}
     >
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">

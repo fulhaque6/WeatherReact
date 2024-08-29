@@ -4,7 +4,6 @@ import Item from "./Item";
 function Search(props) {
   let [getCitiesList, setCitiesList] = useState([]);
   let [inputValue, setInputValue] = useState("");
-  let [loading, setLoading] = useState(false);
 
   let getCitiesBySearch = (val) => {
     let citiesList = [];
@@ -26,19 +25,12 @@ function Search(props) {
 
   let handleLocationClick = async () => {
     setCitiesList([]);
-    setLoading(true);
-    console.log("Loading state:", true);
     setInputValue("");
     await props.getCurrentLocation();
-    setLoading(false);
-    console.log("Loading state:", false);
   };
 
   return (
-    <div
-      className={`container ${props.isDarkMode ? "dark-mode" : "light-mode"}`}
-      style={{ marginTop: "6rem" }}
-    >
+    <div className={`container`} style={{ marginTop: "6rem" }}>
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div
@@ -64,8 +56,6 @@ function Search(props) {
                   borderTopLeftRadius: "50px",
                   borderBottomLeftRadius: "50px",
                   padding: "10px 20px",
-                  backgroundColor: "#e0f7fa",
-                  color: "#0288d1",
                 }}
               />
               <span className="input-group-text bg-transparent border-0">
@@ -78,13 +68,6 @@ function Search(props) {
               </span>
             </div>
           </div>
-          {loading && (
-            <div className="loading-overlay">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Searching...</span>
-              </div>
-            </div>
-          )}
           <ul className="list-group mt-3 rounded shadow-sm">
             {getCitiesList.map((name, i) => (
               <Item

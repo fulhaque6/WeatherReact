@@ -8,9 +8,7 @@ function DeveloperInfo(props) {
 
   return (
     <div
-      className={`developer-info-container ${
-        props.isDarkMode ? "dark-mode" : "light-mode"
-      }`}
+      className={`developer-info-container`}
     >
       <div className="github-link-container">
         <a

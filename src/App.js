@@ -15,10 +15,9 @@ function App() {
     description: "",
     humidity: "",
     windSpeed: "",
-    main: ""
+    main: "",
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
-
 
   const getWeatherApi = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -47,7 +46,7 @@ function App() {
           weather.weather[0].description,
           weather.main.humidity,
           weather.wind.speed,
-          weather.weather[0].main
+          weather.weather[0].main,
         ];
         return allWeatherData;
       })
@@ -65,7 +64,7 @@ function App() {
           description: weather[1],
           humidity: weather[2],
           windSpeed: weather[3],
-          main: weather[4]
+          main: weather[4],
         });
       })
       .catch((error) => {
@@ -125,18 +124,20 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode}/>
+    <div className={`app-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+      <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
       <Search
         cities={Cities}
         setCityName={setCityName}
         showWeather={showWeather}
         getCurrentLocation={getCurrentLocation}
-        isDarkMode={isDarkMode}
       />
       {getCityName !== "" && (
         <>
-          <WeatherData getCity={countryName} getWeatherData={getWeatherData}  isDarkMode={isDarkMode}/>
+          <WeatherData
+            getCity={countryName}
+            getWeatherData={getWeatherData}
+          />
           <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
         </>
       )}
