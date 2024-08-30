@@ -128,7 +128,7 @@ function App() {
       {getCityName !== "" && (
         <>
           <WeatherData getCity={getCityName} getWeatherData={getWeatherData} />
-          <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} />
+          {/* <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} /> */}
         </>
       )}
     </div>
