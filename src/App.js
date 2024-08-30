@@ -22,10 +22,10 @@ function App() {
   const getWeatherApi = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   };
-  const getGeolocationApi = (lat, long, key) => {
+  const getGeolocationApi = (lat, long) => {
     return `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=5&appid=${apiKey}`;
   };
-  const getCityPhotoLink = (city, key) => {
+  const getCityPhotoLink = (city) => {
     return `https://api.unsplash.com/search/photos?query=${city}&client_id=${apiKeyPhotos}`;
   };
 
