@@ -49,14 +49,9 @@ function Search(props) {
                   getCitiesBySearch(event.target.value);
                 }}
                 type="text"
-                className="form-control border-0 rounded-pill"
+                className="form-control border-0 rounded-pill custom-input"
                 placeholder="Search for a city..."
                 aria-label="Search"
-                style={{
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  padding: "10px 20px",
-                }}
               />
               <span className="input-group-text bg-transparent border-0">
                 <i className="bi bi-geo-alt">
