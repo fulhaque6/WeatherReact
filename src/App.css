@@ -1,4 +1,4 @@
-/* Existing styles */
+Existing styles
 
 .container {
   margin-top: 6rem;
@@ -15,6 +15,16 @@
 .input-group-text {
   background-color: transparent;
   border: 0;
+}
+
+.dark-mode .custom-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px white; /* white border on focus */
+}
+
+.light-mode .custom-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(68, 144, 225); /* white border on focus */
 }
 
 .form-control {
@@ -57,8 +67,13 @@
 
 
 .light-mode input::placeholder {
-  color: #9b9b9b; /* Light mode placeholder color */
+  color: rgb(68, 144, 225); /* Light mode placeholder color */
   opacity: 1;
+}
+
+.light-mode .list-group-item:hover {
+  color: #ffffff;
+  background-color: rgb(68,144,225);
 }
 
 /* Dark Mode */
