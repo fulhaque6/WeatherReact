@@ -457,7 +457,7 @@ input:checked+.slider:after {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .theme-toggle-switch {
-    width: 50px;
+    width: 55px;
     height: 30px;
   }
 
@@ -472,14 +472,14 @@ input:checked+.slider:after {
   }
 
   input:checked+.slider:after {
-    left: calc(100% - 21px);
+    left: calc(100% - 25px);
   }
 }
 
 /* Additional styles for smaller screens */
 @media (max-width: 480px) {
   .theme-toggle-switch {
-    width: 40px;
+    width: 50px;
     height: 24px;
   }
 
@@ -496,6 +496,6 @@ input:checked+.slider:after {
   input:checked+.slider:after {
     font-size: 13px;
     top: 40%;
-    left: calc(100% - 10px);
+    left: calc(100% - 20px);
   }
 }
