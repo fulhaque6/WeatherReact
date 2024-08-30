@@ -17,7 +17,7 @@ import {
 function WeatherData(props) {
   const { temperature, description, humidity, windSpeed } =
     props.getWeatherData || {};
-  const city = props.getCity || "Loading...";
+  const city = props.getCity !== "" ? props.getCity : "Loading...";
 
   const getWeatherIcon = (main, description) => {
     switch (main) {
