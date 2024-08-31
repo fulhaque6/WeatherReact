@@ -6,10 +6,9 @@ function Search(props) {
   let [inputValue, setInputValue] = useState("");
 
   let getCitiesBySearch = async (val) => {
-    let userValue = val.trimStart();
     let citiesList = [];
-    if (userValue !== "") {
-      const response = await fetch(props.citiesApi(userValue));
+    if (val !== "" && /^[a-zA-Z\s]+$/.test(val)) {
+      const response = await fetch(props.citiesApi(val));
       const data = await response.json();
       data.forEach(element => {
         citiesList.push({

@@ -17,14 +17,14 @@ Existing styles
   border: 0;
 }
 
-.dark-mode .custom-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px white; /* white border on focus */
+.custom-input {
+  border: none; /* Remove the border */
+  box-shadow: none; /* Remove any box-shadow */
 }
 
-.light-mode .custom-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgb(68, 144, 225); /* white border on focus */
+.custom-input:focus {
+  outline: none; /* Remove the outline */
+  box-shadow: none; /* Remove the box-shadow on focus */
 }
 
 .form-control {
