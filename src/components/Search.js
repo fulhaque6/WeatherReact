@@ -5,18 +5,30 @@ function Search(props) {
   let [getCitiesList, setCitiesList] = useState([]);
   let [inputValue, setInputValue] = useState("");
 
-  let getCitiesBySearch = (val) => {
+  let getCitiesBySearch = async (val) => {
+    let userValue = val.trimStart();
     let citiesList = [];
-    let userValue = val.toLowerCase();
-    userValue = userValue.trimStart();
-    for (let index = 0; index < props.cities.length; index++) {
-      let cityName = props.cities[index].toLowerCase();
-      if (cityName.includes(userValue) && userValue !== "") {
-        citiesList.push(props.cities[index]);
-      }
+    if (userValue !== "") {
+      const response = await fetch(props.citiesApi(userValue));
+      const data = await response.json();
+      data.forEach(element => {
+        citiesList.push(element.name);
+      });
+      setCitiesList(citiesList);
+    }else{
+      setCitiesList([]);
     }
-    setCitiesList(citiesList);
     setInputValue(val);
+    // let citiesList = [];
+    // let userValue = val.trimStart();
+    // return fetch(props.citiesApi(val)).then((response)=> response.json).then((data)=>{
+    //   console.log(data);
+    //   data.map((city)=>{
+    //     citiesList.push(city.name);
+    //   });
+    //   setCitiesList(citiesList);
+    //   setInputValue(val);
+    // });
   };
 
   let handleItemClick = (city) => {
