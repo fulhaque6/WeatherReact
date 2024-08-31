@@ -18,62 +18,23 @@ function App() {
     main: "",
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // State for loader
 
   const getWeatherApi = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   };
+
   const getGeolocationApi = (lat, long) => {
     return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
   };
-  const getCitiesApi = (query)=>{
+
+  const getCitiesApi = (query) => {
     return `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
   };
+
   const getCityPhotoLink = (city) => {
     return `https://api.unsplash.com/search/photos?query=${city}&client_id=${apiKeyPhotos}`;
   };
-
-  //Cities.sort();
-
-  // const getWeather = (val) => {
-  //   return fetch(getWeatherApi(val))
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`Weather API error: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((weather) => {
-  //       let weatherInCelsius = (weather.main.temp - 273.15).toFixed(2);
-  //       let allWeatherData = [
-  //         weatherInCelsius,
-  //         weather.weather[0].description,
-  //         weather.main.humidity,
-  //         weather.wind.speed,
-  //         weather.weather[0].main,
-  //       ];
-  //       return allWeatherData;
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error in getWeather:", error);
-  //       throw error;
-  //     });
-  // };
-
-  // const showWeather = (cityName) => {
-  //   getWeather(cityName)
-  //     .then((weather) => {
-  //       setWeatherData({
-  //         temperature: weather[0],
-  //         description: weather[1],
-  //         humidity: weather[2],
-  //         windSpeed: weather[3],
-  //         main: weather[4],
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error in showWeather:", error);
-  //     });
-  // };
 
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -94,6 +55,7 @@ function App() {
   }
 
   const getCurrentCity = (latitude, longitude) => {
+    setIsLoading(true); // Show loader
     fetch(getGeolocationApi(latitude, longitude))
       .then((response) => {
         if (!response.ok) {
@@ -113,10 +75,12 @@ function App() {
           windSpeed: cityData.wind.speed,
           main: cityData.weather[0].main,
         });
-        //showWeather(city);
       })
       .catch((error) => {
         console.error("Error in getCurrentCity:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Hide loader
       });
   };
 
@@ -124,11 +88,12 @@ function App() {
     <div className={`app-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
       <Search
-        citiesApi = {getCitiesApi}
+        citiesApi={getCitiesApi}
         setCityName={setCityName}
         showWeather={getCurrentCity}
         getCurrentLocation={getCurrentLocation}
       />
+      {isLoading && <div className="loader">Loading...</div>} {/* Loader */}
       {getCityName !== "" && (
         <>
           <WeatherData getCity={getCityName} getWeatherData={getWeatherData} />
