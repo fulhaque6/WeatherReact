@@ -126,7 +126,7 @@ function App() {
       <Search
         citiesApi = {getCitiesApi}
         setCityName={setCityName}
-        showWeather={showWeather}
+        showWeather={getCurrentCity}
         getCurrentLocation={getCurrentLocation}
       />
       {getCityName !== "" && (
