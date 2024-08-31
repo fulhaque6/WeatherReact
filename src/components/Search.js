@@ -12,10 +12,14 @@ function Search(props) {
       const response = await fetch(props.citiesApi(userValue));
       const data = await response.json();
       data.forEach(element => {
-        citiesList.push(element.name);
+        citiesList.push({
+          city : element.name,
+          la : element.lat,
+          lon : element.lon
+        });
       });
       setCitiesList(citiesList);
-    }else{
+    }else{      
       setCitiesList([]);
     }
     setInputValue(val);
