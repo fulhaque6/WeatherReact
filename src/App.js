@@ -19,6 +19,7 @@ function App() {
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // State for loader
+  const [isWeatherActiveOnce,setWeatherActiveOnce] = useState(false);
 
   const getWeatherApi = (city) => {
     return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -75,6 +76,9 @@ function App() {
           windSpeed: cityData.wind.speed,
           main: cityData.weather[0].main,
         });
+        if(isWeatherActiveOnce === false){
+          setWeatherActiveOnce(true);
+        }
       })
       .catch((error) => {
         console.error("Error in getCurrentCity:", error);
@@ -92,9 +96,10 @@ function App() {
         setCityName={setCityName}
         showWeather={getCurrentCity}
         getCurrentLocation={getCurrentLocation}
+        setWeatherData ={setWeatherData}
       />
       {isLoading && <div className="loader">Loading...</div>} {/* Loader */}
-      {getCityName !== "" && (
+      {isWeatherActiveOnce === true && (
         <>
           <WeatherData getCity={getCityName} getWeatherData={getWeatherData} />
           {/* <Photo cityPhoto={getCityPhotoLink} getCity={getCityName} /> */}

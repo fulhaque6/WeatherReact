@@ -17,9 +17,10 @@ import {
 function WeatherData(props) {
   const { temperature, description, humidity, windSpeed } =
     props.getWeatherData || {};
-  const city = props.getCity !== "" ? props.getCity : "Loading...";
+    const city = props.getCity !== "" ? props.getCity : <span className="weather-loader"></span>;
 
   const getWeatherIcon = (main, description) => {
+    if (main === "") return;
     switch (main) {
       case "Clear":
         return <FaCloudSun className="weather-icon" />;
@@ -47,9 +48,7 @@ function WeatherData(props) {
   const weatherIcon = getWeatherIcon(props.getWeatherData.main, description);
 
   return (
-    <div
-      className={`container mt-3`}
-    >
+    <div className={`container mt-3`}>
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="card text-center shadow-lg rounded border-light">
@@ -58,10 +57,7 @@ function WeatherData(props) {
                 {city}
               </h2>
               <div className="mb-3">{weatherIcon}</div>
-              <p
-                id="temperature"
-                className="card-text display-4 mb-3"
-              >
+              <p id="temperature" className="card-text display-4 mb-3">
                 {temperature}°C
               </p>
               <p id="weatherDescription" className="card-text mb-3">
