@@ -53,6 +53,14 @@ function Search(props) {
               <input
                 value={inputValue}
                 onChange={(event) => {
+                  props.setCityName("");
+                  props.setWeatherData({
+                    temperature: "",
+                    description: "",
+                    humidity: "",
+                    windSpeed: "",
+                    main: "",
+                  });
                   setInputValue(event.target.value);
                   debouncedSearch(event.target.value);
                 }}
