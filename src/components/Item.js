@@ -5,7 +5,7 @@ function Item(props) {
       onClick={() => {
         props.citiesList([]);
         props.onClick(props.city.city);
-        props.showWeather(props.city.la,props.city.lon);
+        props.showWeather(props.city.lat,props.city.lon);
       }}
     >
       {props.city.city}

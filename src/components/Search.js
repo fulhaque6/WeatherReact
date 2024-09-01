@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import debounce from "lodash.debounce";
 import Item from "./Item";
 
 function Search(props) {
@@ -10,29 +11,20 @@ function Search(props) {
     if (val !== "" && /^[a-zA-Z\s]+$/.test(val)) {
       const response = await fetch(props.citiesApi(val));
       const data = await response.json();
-      data.forEach(element => {
+      data.forEach((element) => {
         citiesList.push({
-          city : element.name,
-          la : element.lat,
-          lon : element.lon
+          city: element.name,
+          lat: element.lat,
+          lon: element.lon,
         });
       });
       setCitiesList(citiesList);
-    }else{      
+    } else {
       setCitiesList([]);
     }
-    setInputValue(val);
-    // let citiesList = [];
-    // let userValue = val.trimStart();
-    // return fetch(props.citiesApi(val)).then((response)=> response.json).then((data)=>{
-    //   console.log(data);
-    //   data.map((city)=>{
-    //     citiesList.push(city.name);
-    //   });
-    //   setCitiesList(citiesList);
-    //   setInputValue(val);
-    // });
   };
+
+  const debouncedSearch = useMemo(() => debounce(getCitiesBySearch, 300), []);
 
   let handleItemClick = (city) => {
     setInputValue(city);
@@ -61,7 +53,8 @@ function Search(props) {
               <input
                 value={inputValue}
                 onChange={(event) => {
-                  getCitiesBySearch(event.target.value);
+                  setInputValue(event.target.value);
+                  debouncedSearch(event.target.value);
                 }}
                 type="text"
                 className="form-control border-0 rounded-pill custom-input"
