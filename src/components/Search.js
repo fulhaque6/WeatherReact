@@ -12,6 +12,7 @@ function Search(props) {
   const getCitiesApi = (query) => `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
 
   const handleLocationClick = () => {
+    setInputValue("");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     } else {
