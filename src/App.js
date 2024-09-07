@@ -1,95 +1,38 @@
 import "./App.css";
-import React, { useState } from "react";
 import WeatherData from "./components/WeatherData";
 import Search from "./components/Search";
 import DeveloperInfo from "./components/DeveloperInfo";
+import useWeatherData from "./hooks/useWeatherData";
+
 
 function App() {
-  const apiKey = "bcab6e6950bd669881812038ba52d878&units";
-  let [getCityName, setCityName] = useState("");
-  let [getWeatherData, setWeatherData] = useState({
-    temperature: "",
-    description: "",
-    humidity: "",
-    windSpeed: "",
-    main: "",
-  });
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // State for loader
-  const [isWeatherActiveOnce,setWeatherActiveOnce] = useState(false);
-  const getGeolocationApi = (lat, long) => {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
-  };
-
-  const getCitiesApi = (query) => {
-    return `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
-  };
-
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  };
-
-  function successCallback(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    getCurrentCity(latitude, longitude);
-  }
-
-  function errorCallback(error) {
-    console.error("Error occurred while retrieving location:", error);
-  }
-
-  const getCurrentCity = (latitude, longitude) => {
-    setIsLoading(true); // Show loader
-    fetch(getGeolocationApi(latitude, longitude))
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Geolocation API error: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((cityData) => {
-        console.log(cityData.name);
-        let city = cityData.name;
-        setCityName(city);
-        let weatherInCelsius = (cityData.main.temp - 273.15).toFixed(2);
-        setWeatherData({
-          temperature: weatherInCelsius,
-          description: cityData.weather[0].description,
-          humidity: cityData.main.humidity,
-          windSpeed: cityData.wind.speed,
-          main: cityData.weather[0].main,
-        });
-        if(isWeatherActiveOnce === false){
-          setWeatherActiveOnce(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Error in getCurrentCity:", error);
-      })
-      .finally(() => {
-        setIsLoading(false); // Hide loader
-      });
-  };
-
+  const {
+    cityName,
+    setCityName,
+    weatherData,
+    setWeatherData,
+    isLoading,
+    setIsLoading,
+    isWeatherActiveOnce,
+    setWeatherActiveOnce,
+    isDarkMode,
+    setIsDarkMode
+  } = useWeatherData();
+  
   return (
     <div className={`app-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
       <Search
-        citiesApi={getCitiesApi}
         setCityName={setCityName}
-        showWeather={getCurrentCity}
-        getCurrentLocation={getCurrentLocation}
+        setIsLoading={setIsLoading}
         setWeatherData ={setWeatherData}
+        setWeatherActiveOnce={setWeatherActiveOnce} 
+        isWeatherActiveOnce={isWeatherActiveOnce}
       />
       {isLoading && <div className="loader">Loading...</div>} {/* Loader */}
       {isWeatherActiveOnce === true && (
         <>
-          <WeatherData getCity={getCityName} getWeatherData={getWeatherData} />
+          <WeatherData getCity={cityName} getWeatherData={weatherData} />
         </>
       )}
     </div>
