@@ -1,7 +1,7 @@
 import "./App.css";
 import WeatherData from "./components/WeatherData";
 import Search from "./components/Search";
-import DeveloperInfo from "./components/DeveloperInfo/DeveloperInfo";
+import DeveloperInfo from "./components/DeveloperInfo";
 import useWeatherData from "./hooks/useWeatherData";
 
 function App() {

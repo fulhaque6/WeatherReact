@@ -1,8 +1,8 @@
 function Item(props) {
   const handleClick = () => {
-    props.citiesList([]); // Clear the list of cities
-    props.onClick(props.city); // Pass the clicked city name to the parent component
-    props.showWeather(props.city.lat, props.city.lon); // Show the weather for the clicked city
+    props.citiesList([]); 
+    props.onClick(props.city); 
+    props.showWeather(props.city.lat, props.city.lon); 
   };
 
   return (

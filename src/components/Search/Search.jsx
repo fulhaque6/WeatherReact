@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Item from "./Item";
+import Item from "../Item";
 
 function Search(props) {
   const [citiesList, setCitiesList] = useState([]);
@@ -78,7 +78,6 @@ function Search(props) {
   };
 
   useEffect(() => {
-
     if (inputValue.trim() === "") {
       setCitiesList([]);
       return;
