@@ -1,15 +1,17 @@
-import React, { useState, useMemo, useEffect } from "react";
-import debounce from "lodash.debounce";
+import { useState, useEffect } from "react";
 import Item from "./Item";
 
 function Search(props) {
   const [citiesList, setCitiesList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [timeoutId, setTimeoutId] = useState(null);
   const apiKey = "bcab6e6950bd669881812038ba52d878&units";
 
-  const getGeolocationApi = (lat, long) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
+  const getGeolocationApi = (lat, long) =>
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
 
-  const getCitiesApi = (query) => `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
+  const getCitiesApi = (query) =>
+    `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
 
   const handleLocationClick = () => {
     setInputValue("");
@@ -61,7 +63,11 @@ function Search(props) {
       try {
         const response = await fetch(getCitiesApi(query));
         const data = await response.json();
-        const cities = data.map(({ name, lat, lon }) => ({ city: name, lat, lon }));
+        const cities = data.map(({ name, lat, lon }) => ({
+          city: name,
+          lat,
+          lon,
+        }));
         setCitiesList(cities);
       } catch (error) {
         console.error("Error fetching cities:", error);
@@ -71,13 +77,24 @@ function Search(props) {
     }
   };
 
-  const debouncedFetchCities = useMemo(() => debounce(fetchCitiesBySearch, 300), []);
-
   useEffect(() => {
-    return () => {
-      debouncedFetchCities.cancel();
-    };
-  }, [debouncedFetchCities]);
+
+    if (inputValue.trim() === "") {
+      setCitiesList([]);
+      return;
+    }
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    const newTimeoutId = setTimeout(() => {
+      fetchCitiesBySearch(inputValue);
+    }, 500);
+    setTimeoutId(newTimeoutId);
+
+    return () => clearTimeout(newTimeoutId);
+
+  }, [inputValue]);
 
   const handleItemClick = (city) => {
     setInputValue(city);
@@ -94,14 +111,16 @@ function Search(props) {
       main: "",
     });
     setInputValue(value);
-    debouncedFetchCities(value);
   };
 
   return (
     <div className="container" style={{ marginTop: "6rem" }}>
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
-          <div className="bg-light rounded-pill shadow-sm" style={{ backgroundColor: "#e0f7fa" }}>
+          <div
+            className="bg-light rounded-pill shadow-sm"
+            style={{ backgroundColor: "#e0f7fa" }}
+          >
             <div className="input-group">
               <span className="input-group-text bg-transparent border-0">
                 <i className="fa-solid fa-magnifying-glass"></i>
@@ -115,7 +134,10 @@ function Search(props) {
                 aria-label="Search"
               />
               <span className="input-group-text bg-transparent border-0">
-                <i className="fa-solid fa-location-dot" onClick={handleLocationClick}></i>
+                <i
+                  className="fa-solid fa-location-dot"
+                  onClick={handleLocationClick}
+                ></i>
               </span>
             </div>
           </div>
