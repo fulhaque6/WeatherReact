@@ -1,3 +1,1 @@
-import WeatherData from "./WeatherData";
-
-export default WeatherData;
+export { default } from './WeatherData';

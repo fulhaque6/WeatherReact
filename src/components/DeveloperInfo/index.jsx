@@ -1,3 +1,1 @@
-import DeveloperInfo from "./DeveloperInfo";
-
-export default DeveloperInfo;
+export { default } from './DeveloperInfo';
