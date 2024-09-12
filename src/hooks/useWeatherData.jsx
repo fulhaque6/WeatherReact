@@ -9,21 +9,21 @@ function useWeatherData() {
     windSpeed: "",
     main: "",
   });
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isWeatherActiveOnce, setWeatherActiveOnce] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [weatherActiveOnce, setWeatherActiveOnce] = useState(false);
 
   return {
     cityName,
     setCityName,
     weatherData,
     setWeatherData,
-    isLoading,
-    setIsLoading,
-    isWeatherActiveOnce,
+    loading,
+    setLoading,
+    weatherActiveOnce,
     setWeatherActiveOnce,
-    isDarkMode,
-    setIsDarkMode
+    darkMode,
+    setDarkMode
   };
 }
 

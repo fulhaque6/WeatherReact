@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Item from "../Item";
 
-function Search(props) {
+function Search({
+  setLoading,
+  setCityName,
+  setWeatherData,
+  weatherActiveOnce,
+  setWeatherActiveOnce,
+}) {
   const [citiesList, setCitiesList] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [timeoutId, setTimeoutId] = useState(null);
+  const inputChangedByUser = useRef(true);
   const apiKey = "bcab6e6950bd669881812038ba52d878&units";
 
-  const getGeolocationApi = (lat, long) =>
+  const geolocationApi = (lat, long) =>
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
 
   const getCitiesApi = (query) =>
@@ -24,37 +30,37 @@ function Search(props) {
 
   const successCallback = (position) => {
     const { latitude, longitude } = position.coords;
-    getCurrentCity(latitude, longitude);
+    currentCity(latitude, longitude);
   };
 
   const errorCallback = (error) => {
     console.error("Error retrieving location:", error);
   };
 
-  const getCurrentCity = async (latitude, longitude) => {
+  const currentCity = async (latitude, longitude) => {
     try {
-      props.setIsLoading(true);
-      const response = await fetch(getGeolocationApi(latitude, longitude));
+      setLoading(true);
+      const response = await fetch(geolocationApi(latitude, longitude));
       if (!response.ok) {
         throw new Error(`Geolocation API error: ${response.status}`);
       }
       const cityData = await response.json();
-      props.setCityName(cityData.name);
+      setCityName(cityData.name);
       const weatherInCelsius = (cityData.main.temp - 273.15).toFixed(2);
-      props.setWeatherData({
+      setWeatherData({
         temperature: weatherInCelsius,
         description: cityData.weather[0].description,
         humidity: cityData.main.humidity,
         windSpeed: cityData.wind.speed,
         main: cityData.weather[0].main,
       });
-      if (!props.isWeatherActiveOnce) {
-        props.setWeatherActiveOnce(true);
+      if (!weatherActiveOnce) {
+        setWeatherActiveOnce(true);
       }
     } catch (error) {
       console.error("Error fetching weather for location:", error);
     } finally {
-      props.setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -78,37 +84,39 @@ function Search(props) {
   };
 
   useEffect(() => {
+    if (!inputChangedByUser.current) {
+      inputChangedByUser.current = true;
+      return;
+    }
+
     if (inputValue.trim() === "") {
       setCitiesList([]);
       return;
     }
 
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    const newTimeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       fetchCitiesBySearch(inputValue);
     }, 500);
-    setTimeoutId(newTimeoutId);
 
-    return () => clearTimeout(newTimeoutId);
-
+    return () => clearTimeout(timeoutId);
   }, [inputValue]);
 
   const handleItemClick = (city) => {
+    inputChangedByUser.current = false;
     setInputValue(city);
   };
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    props.setCityName("");
-    props.setWeatherData({
+    setCityName("");
+    setWeatherData({
       temperature: "",
       description: "",
       humidity: "",
       windSpeed: "",
       main: "",
     });
+    inputChangedByUser.current = true;
     setInputValue(value);
   };
 
@@ -147,8 +155,8 @@ function Search(props) {
                 city={cityObj.city}
                 onClick={() => handleItemClick(cityObj.city)}
                 citiesList={setCitiesList}
-                setCityName={props.setCityName}
-                showWeather={() => getCurrentCity(cityObj.lat, cityObj.lon)}
+                setCityName={setCityName}
+                showWeather={() => currentCity(cityObj.lat, cityObj.lon)}
               />
             ))}
           </ul>

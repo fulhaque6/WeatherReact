@@ -10,26 +10,26 @@ function App() {
     setCityName,
     weatherData,
     setWeatherData,
-    isLoading,
-    setIsLoading,
-    isWeatherActiveOnce,
+    loading,
+    setLoading,
+    weatherActiveOnce,
     setWeatherActiveOnce,
-    isDarkMode,
-    setIsDarkMode,
+    darkMode,
+    setDarkMode,
   } = useWeatherData();
 
   return (
-    <div className={`app-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
-      <DeveloperInfo setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
+    <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
+      <DeveloperInfo setIsDarkMode={setDarkMode} isDarkMode={darkMode} />
       <Search
         setCityName={setCityName}
-        setIsLoading={setIsLoading}
+        setIsLoading={setLoading}
         setWeatherData={setWeatherData}
         setWeatherActiveOnce={setWeatherActiveOnce}
-        isWeatherActiveOnce={isWeatherActiveOnce}
+        isWeatherActiveOnce={weatherActiveOnce}
       />
-      {isLoading && <div className="loader">Loading...</div>}
-      {isWeatherActiveOnce && (
+      {loading && <div className="loader">Loading...</div>}
+      {weatherActiveOnce && (
         <WeatherData getCity={cityName} getWeatherData={weatherData} />
       )}
     </div>
