@@ -1,14 +1,10 @@
-
-function DeveloperInfo(props) {
-
+function DeveloperInfo({ darkMode, setDarkMode }) {
   const toggleTheme = () => {
-    props.setIsDarkMode((prevMode) => !prevMode);
+    setDarkMode((prevMode) => !prevMode);
   };
 
   return (
-    <div
-      className={`developer-info-container`}
-    >
+    <div className="developer-info-container">
       <div className="github-link-container">
         <a
           href="https://github.com/fulhaque6/WeatherReact"
@@ -21,7 +17,7 @@ function DeveloperInfo(props) {
       </div>
       <div className="theme-toggle-container">
         <label className="theme-toggle-switch">
-          <input type="checkbox" checked={props.isDarkMode} onChange={toggleTheme} />
+          <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
           <span className="slider"></span>
         </label>
       </div>

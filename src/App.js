@@ -20,17 +20,17 @@ function App() {
 
   return (
     <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
-      <DeveloperInfo setIsDarkMode={setDarkMode} isDarkMode={darkMode} />
+      <DeveloperInfo setDarkMode={setDarkMode} darkMode={darkMode} />
       <Search
         setCityName={setCityName}
-        setIsLoading={setLoading}
+        setLoading={setLoading}
         setWeatherData={setWeatherData}
         setWeatherActiveOnce={setWeatherActiveOnce}
-        isWeatherActiveOnce={weatherActiveOnce}
+        weatherActiveOnce={weatherActiveOnce}
       />
       {loading && <div className="loader">Loading...</div>}
       {weatherActiveOnce && (
-        <WeatherData getCity={cityName} getWeatherData={weatherData} />
+        <WeatherData cityName={cityName} weatherData={weatherData} />
       )}
     </div>
   );

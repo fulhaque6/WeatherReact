@@ -2,25 +2,21 @@ import React from "react";
 import {
   FaCloud,
   FaCloudSun,
-  FaCloudMoon,
   FaCloudShowersHeavy,
   FaCloudSunRain,
   FaSnowflake,
   FaWind,
-  FaUmbrella,
   FaBolt,
-  FaCloudBolt,
-  FaMeteor,
-  FaHail,
 } from "react-icons/fa";
 
-function WeatherData(props) {
-  const { temperature, description, humidity, windSpeed } =
-    props.getWeatherData || {};
-    const city = props.getCity !== "" ? props.getCity : <span className="weather-loader"></span>;
+function WeatherData({ weatherData = {}, cityName }) {
+  const { temperature, description, humidity, windSpeed, main } =
+    weatherData;
+  const city =
+    cityName !== "" ? cityName : <span className="weather-loader"></span>;
 
   const getWeatherIcon = (main, description) => {
-    if (main === "") return;
+    if (!main) return;
     switch (main) {
       case "Clear":
         return <FaCloudSun className="weather-icon" />;
@@ -45,10 +41,10 @@ function WeatherData(props) {
     }
   };
 
-  const weatherIcon = getWeatherIcon(props.getWeatherData.main, description);
+  const weatherIcon = getWeatherIcon(main, description);
 
   return (
-    <div className={`container mt-3`}>
+    <div className="container mt-3">
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="card text-center shadow-lg rounded border-light">
