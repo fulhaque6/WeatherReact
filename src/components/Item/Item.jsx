@@ -1,8 +1,11 @@
-function Item(props) {
+import React from "react";
+
+const Item = ({ city, onClick, showWeather }) => {
   const handleClick = () => {
-    props.citiesList([]); 
-    props.onClick(props.city); 
-    props.showWeather(props.city.lat, props.city.lon); 
+    onClick(city); // Handle city selection
+    // Assuming showWeather is used to fetch weather data, 
+    // you need to pass the coordinates or fetch them inside the function.
+    showWeather();  
   };
 
   return (
@@ -10,9 +13,9 @@ function Item(props) {
       className="list-group-item d-flex align-items-center border-0 rounded mb-2"
       onClick={handleClick}
     >
-      {props.city}
+      {city}
     </li>
   );
-}
+};
 
 export default Item;
