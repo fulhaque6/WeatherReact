@@ -1,15 +1,27 @@
-import React from "react";
 import Item from "../Item";
 
 const CitiesList = ({ citiesList, onItemClick, onWeatherShow }) => {
+
+  const fetchCityName = (cityData)=>{
+    return cityData.city;
+  }
+
+  const fetchCityLat = (cityData)=>{
+    return cityData.lat;
+  }
+
+  const fetchCityLon = (cityData)=>{
+    return cityData.lon;
+  }
+
   return (
     <ul className="list-group mt-3 rounded shadow-sm">
       {citiesList.map((cityObj, i) => (
         <Item
           key={i}
-          city={cityObj.city}
-          onClick={() => onItemClick(cityObj.city)}
-          showWeather={() => onWeatherShow(cityObj.lat, cityObj.lon)}
+          city={fetchCityName(cityObj)}
+          onClick={() => onItemClick(fetchCityName(cityObj))}
+          showWeather={() => onWeatherShow(fetchCityLat(cityObj), fetchCityLon(cityObj))}
         />
       ))}
     </ul>
