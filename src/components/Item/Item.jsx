@@ -1,10 +1,6 @@
-import React from "react";
-
 const Item = ({ city, onClick, showWeather }) => {
   const handleClick = () => {
-    onClick(city); // Handle city selection
-    // Assuming showWeather is used to fetch weather data, 
-    // you need to pass the coordinates or fetch them inside the function.
+    onClick(city);
     showWeather();  
   };
 

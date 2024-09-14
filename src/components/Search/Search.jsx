@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import SearchInput from "../SearchInput";
 import CitiesList from "../CitiesList";
 import useGeolocation from "../../hooks/useGeolocation";

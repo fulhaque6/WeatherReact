@@ -1,4 +1,3 @@
-import React from "react";
 import { FaSearch, FaLocationArrow } from "react-icons/fa";
 
 const SearchInput = ({ inputValue, onChange, onLocationClick }) => (
