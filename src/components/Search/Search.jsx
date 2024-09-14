@@ -51,6 +51,12 @@ function Search({ setLoading, setCityName, setWeatherData, weatherActiveOnce, se
     return () => clearTimeout(timeoutId);
   }, [inputValue]);
 
+
+  const handleOnLocationClick = ()=>{
+    setInputValue("");
+    handleLocationClick();
+  }
+
   const handleItemClick = (city) => {
     setCitiesList([]);
     inputChangedByUser.current = false;
@@ -78,7 +84,7 @@ function Search({ setLoading, setCityName, setWeatherData, weatherActiveOnce, se
           <SearchInput
             inputValue={inputValue}
             onChange={handleInputChange}
-            onLocationClick={handleLocationClick}
+            onLocationClick={handleOnLocationClick}
           />
           <CitiesList
             citiesList={citiesList}
