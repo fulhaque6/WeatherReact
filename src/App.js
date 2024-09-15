@@ -1,38 +1,39 @@
-import "./App.css";
-import WeatherData from "./components/WeatherData";
-import Search from "./components/Search";
-import DeveloperInfo from "./components/DeveloperInfo";
-import useWeatherData from "./hooks/useWeatherData";
+import { Suspense, lazy } from "react";
 
-function App() {
-  const {
-    cityName,
-    setCityName,
-    weatherData,
-    setWeatherData,
-    loading,
-    setLoading,
-    weatherActiveOnce,
-    setWeatherActiveOnce,
-    darkMode,
-    setDarkMode,
-  } = useWeatherData();
+import { WeatherProvider, useWeather } from "./context/WeatherContext";
+
+import DeveloperInfo from "./components/DeveloperInfo";
+
+import "./App.css";
+
+const WeatherData = lazy(() => import("./components/WeatherData"));
+
+const Search = lazy(() => import("./components/Search"));
+
+function AppContent() {
+  const { isWeatherDataVisible, loading, cityName, weatherData, darkMode } = useWeather();
 
   return (
     <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
-      <DeveloperInfo setDarkMode={setDarkMode} darkMode={darkMode} />
-      <Search
-        setCityName={setCityName}
-        setLoading={setLoading}
-        setWeatherData={setWeatherData}
-        setWeatherActiveOnce={setWeatherActiveOnce}
-        weatherActiveOnce={weatherActiveOnce}
-      />
+      <DeveloperInfo />
+      <Suspense fallback={<div className="loader">Loading components...</div>}>
+        <Search />
+      </Suspense>
       {loading && <div className="loader">Loading...</div>}
-      {weatherActiveOnce && (
-        <WeatherData cityName={cityName} weatherData={weatherData} />
+      {isWeatherDataVisible && (
+        <Suspense fallback={<div className="loader">Loading weather data...</div>}>
+          <WeatherData cityName={cityName} weatherData={weatherData} />
+        </Suspense>
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <WeatherProvider>
+      <AppContent />
+    </WeatherProvider>
   );
 }
 
