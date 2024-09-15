@@ -1,5 +1,3 @@
-import { FaSearch, FaLocationArrow } from "react-icons/fa";
-
 const SearchInput = ({ inputValue, onChange, onLocationClick }) => (
   <div
     className="bg-light rounded-pill shadow-sm"

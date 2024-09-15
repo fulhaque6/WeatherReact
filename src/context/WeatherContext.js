@@ -12,7 +12,7 @@ export const WeatherProvider = ({ children }) => {
     humidity: "",
     windSpeed: "",
     main: "",
-  });
+  }); 
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isWeatherDataVisible, setisWeatherDataVisible] = useState(false);

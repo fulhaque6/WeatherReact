@@ -1,16 +1,7 @@
-import {
-  FaCloud,
-  FaCloudSun,
-  FaCloudShowersHeavy,
-  FaCloudSunRain,
-  FaSnowflake,
-  FaWind,
-  FaBolt,
-} from "react-icons/fa";
+import './WeatherData.scss';
 
 function WeatherData({ weatherData = {}, cityName }) {
-  const { temperature, description, humidity, windSpeed, main } =
-    weatherData;
+  const { temperature, description, humidity, windSpeed, main } = weatherData;
   const city =
     cityName !== "" ? cityName : <span className="weather-loader"></span>;
 
@@ -18,25 +9,25 @@ function WeatherData({ weatherData = {}, cityName }) {
     if (!main) return;
     switch (main) {
       case "Clear":
-        return <FaCloudSun className="weather-icon" />;
+        return <i className="fa-solid fa-cloud-sun"></i>;
       case "Clouds":
         if (description.includes("rain"))
-          return <FaCloudShowersHeavy className="weather-icon" />;
+          return <i className="fa-solid fa-cloud-showers-heavy"></i>;
         if (description.includes("drizzle"))
-          return <FaCloudShowersHeavy className="weather-icon" />;
+          return <i className="fa-solid fa-cloud-showers-heavy"></i>;
         if (description.includes("snow"))
-          return <FaCloudSunRain className="weather-icon" />;
-        return <FaCloud className="weather-icon" />;
+          return <i className="fa-solid fa-cloud-sun-rain"></i>;
+        return <i className="fa-solid fa-cloud"></i>;
       case "Rain":
-        return <FaCloudShowersHeavy className="weather-icon" />;
+        return <i className="fa-solid fa-raindrops"></i>;
       case "Snow":
-        return <FaSnowflake className="weather-icon" />;
+        return <i className="fa-solid fa-snowflake"></i>;
       case "Thunderstorm":
-        return <FaBolt className="weather-icon" />;
+        return <i className="fa-solid fa-cloud-bolt"></i>;
       case "Wind":
-        return <FaWind className="weather-icon" />;
+        return <i className="fa-solid fa-wind"></i>;
       default:
-        return <FaCloud className="weather-icon" />;
+        return <i className="fa-solid fa-cloud"></i>;
     }
   };
 
@@ -51,7 +42,7 @@ function WeatherData({ weatherData = {}, cityName }) {
               <h2 id="cityName" className="card-title mb-4">
                 {city}
               </h2>
-              <div className="mb-3">{weatherIcon}</div>
+              <div className="mb-3 fs-1 weather-icon">{weatherIcon}</div>
               <p id="temperature" className="card-text display-4 mb-3">
                 {temperature}°C
               </p>
@@ -63,7 +54,7 @@ function WeatherData({ weatherData = {}, cityName }) {
                   <strong>Humidity:</strong> {humidity}%
                 </p>
                 <p id="windSpeed" className="card-text">
-                  <FaWind className="me-2" />
+                  <i className="fa-solid fa-wind"></i>
                   <strong>Wind Speed:</strong> {windSpeed} km/h
                 </p>
               </div>
