@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const useGeolocation = (
   setLoading,
   setCityName,
@@ -11,12 +13,12 @@ const useGeolocation = (
   const getCurrentCity = async (latitude, longitude) => {
     try {
       setLoading(true);
-      const response = await fetch(geolocationApi(latitude, longitude));
-      if (!response.ok) {
-        throw new Error(`Geolocation API error: ${response.status}`);
-      }
-      const cityData = await response.json();
+      const response = await axios.get(geolocationApi(latitude, longitude));
+
+      const cityData = response.data; 
+
       setCityName(cityData.name);
+
       const weatherInCelsius = (cityData.main.temp - 273.15).toFixed(2);
       setWeatherData({
         temperature: weatherInCelsius,
@@ -25,6 +27,7 @@ const useGeolocation = (
         windSpeed: cityData.wind.speed,
         main: cityData.weather[0].main,
       });
+
       if (!weatherActiveOnce) {
         setWeatherActiveOnce(true);
       }
@@ -51,7 +54,7 @@ const useGeolocation = (
     }
   };
 
-  return { handleLocationClick,getCurrentCity };
+  return { handleLocationClick, getCurrentCity };
 };
 
 export default useGeolocation;

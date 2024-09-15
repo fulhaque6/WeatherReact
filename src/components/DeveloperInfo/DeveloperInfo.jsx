@@ -1,8 +1,7 @@
-function DeveloperInfo({ darkMode, setDarkMode }) {
-  const toggleTheme = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
+import { useWeather } from "../../context/WeatherContext";
 
+function DeveloperInfo() {
+  const { darkMode, toggleDarkMode } = useWeather();
   return (
     <div className="developer-info-container">
       <div className="github-link-container">
@@ -17,7 +16,7 @@ function DeveloperInfo({ darkMode, setDarkMode }) {
       </div>
       <div className="theme-toggle-container">
         <label className="theme-toggle-switch">
-          <input type="checkbox" checked={darkMode} onChange={toggleTheme} />
+          <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
           <span className="slider"></span>
         </label>
       </div>

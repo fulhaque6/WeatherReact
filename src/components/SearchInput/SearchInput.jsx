@@ -7,7 +7,7 @@ const SearchInput = ({ inputValue, onChange, onLocationClick }) => (
   >
     <div className="input-group">
       <span className="input-group-text bg-transparent border-0">
-        <FaSearch />
+        <i className="fa-solid fa-magnifying-glass"></i>
       </span>
       <input
         value={inputValue}
@@ -18,7 +18,7 @@ const SearchInput = ({ inputValue, onChange, onLocationClick }) => (
         aria-label="Search"
       />
       <span className="input-group-text bg-transparent border-0">
-        <FaLocationArrow onClick={onLocationClick} />
+        <i className="fa-solid fa-location-dot" onClick={onLocationClick}></i>
       </span>
     </div>
   </div>
