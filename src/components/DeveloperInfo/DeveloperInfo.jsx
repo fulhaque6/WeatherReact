@@ -1,4 +1,5 @@
 import { useWeather } from "../../context/WeatherContext";
+import './DeveloperInfo.css';
 
 function DeveloperInfo() {
   const { darkMode, toggleDarkMode } = useWeather();

@@ -1,5 +1,36 @@
-.weather-icon{
-    &.dark-mode{
+.weather-icon {
+    &.dark-mode {
         background-color: white;
     }
+}
+
+.card-text {
+    font-family: 'Arial', sans-serif;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.dark-mode .card {
+    background: #2c2c2c;
+}
+
+.dark-mode .card-title,
+.dark-mode .card-text {
+    color: #e0e0e0;
+}
+
+.weather-icon {
+    font-size: 3rem;
+    color: #ffcc00;
+    /* Light yellow for the icon */
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.dark-mode .weather-icon {
+    color: #e0e0e0;
+    /* Adjust if needed */
 }

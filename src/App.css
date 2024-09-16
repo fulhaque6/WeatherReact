@@ -83,20 +83,6 @@
     transform: rotate(360deg);
   }
 }
-
-
-.container {
-  margin-top: 6rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .input-group-text {
   background-color: transparent;
   border: 0;
@@ -213,10 +199,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .container {
-    margin-top: 4rem;
-  }
-
   .form-control {
     padding: 8px 18px;
   }
@@ -227,10 +209,6 @@
 }
 
 @media (max-width: 480px) {
-  .container {
-    margin-top: 3rem;
-  }
-
   .form-control {
     padding: 6px 16px;
   }
@@ -253,34 +231,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.weather-icon {
-  font-size: 3rem;
-  color: #ffcc00;
-  /* Light yellow for the icon */
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
-}
-
-.card {
-  background: #f8f9fa;
-  /* Light background color */
-}
-
-.card-body {
-  border-radius: 15px;
-  /* Rounded corners */
-}
-
-.card-text {
-  font-family: 'Arial', sans-serif;
-  /* Improved font style */
-}
-
-.card-title {
-  font-weight: bold;
-  font-size: 2rem;
 }
 
 .text-primary {
@@ -327,45 +277,6 @@
   z-index: 9999;
 }
 
-/* Developer Info component adjustments */
-.developer-info-container {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  /* Space between the GitHub link and the theme toggle button */
-}
-
-/* GitHub Link Styles */
-.github-link-container {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.github-link-container:hover {
-  background-color: rgba(255, 255, 255, 1);
-  transform: scale(1.1);
-}
-
-.github-link {
-  color: #000;
-  font-size: 28px;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.github-link-container:hover .github-link {
-  color: #0366d6;
-}
-
 /* Dark Mode Styles */
 .dark-mode .App {
   background-color: #1e1e1e;
@@ -374,29 +285,6 @@
 
 .dark-mode .App-header {
   background-color: #121212;
-}
-
-.dark-mode .card {
-  background: #2c2c2c;
-}
-
-.dark-mode .card-title,
-.dark-mode .card-text {
-  color: #e0e0e0;
-}
-
-.dark-mode .github-link-container {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #e0e0e0;
-}
-
-.dark-mode .github-link {
-  color: #e0e0e0;
-}
-
-.dark-mode .weather-icon {
-  color: #e0e0e0;
-  /* Adjust if needed */
 }
 
 /* Light Mode Styles (Default) */
@@ -431,164 +319,4 @@
 
 .light-mode .App-header {
   background-color: #282c34;
-}
-
-.light-mode .card {
-  background: #f8f9fa;
-}
-
-.light-mode .card-title,
-.light-mode .card-text {
-  color: #000000;
-}
-
-.light-mode .github-link-container {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.light-mode .github-link {
-  color: #000;
-}
-
-.light-mode .weather-icon {
-  color: #ffcc00;
-  /* Adjust if needed */
-}
-
-/* Dark Mode Toggle Button Styles */
-.theme-toggle-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  /* Increased space between toggle switch and other elements */
-}
-
-.theme-toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  /* Increased width for a more prominent switch */
-  height: 34px;
-  /* Increased height for a more prominent switch */
-}
-
-.theme-toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ddd;
-  /* Light background for light mode */
-  transition: .4s;
-  border-radius: 34px;
-  /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Shadow for a modern look */
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  border-radius: 50%;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Shadow for a floating effect */
-}
-
-/* Checked state for toggle switch */
-input:checked+.slider {
-  background-color: #000000;
-  /* Primary color for dark mode */
-}
-
-input:checked+.slider:before {
-  transform: translateX(26px);
-  /* Adjusted for new dimensions */
-}
-
-/* Dark Mode Slider Adjustments */
-.dark-mode .slider {
-  background-color: #555;
-  /* Darker background for dark mode */
-}
-
-.slider:after {
-  content: '🌙';
-  position: absolute;
-  top: 50%;
-  left: 7px;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #000;
-  transition: color 0.4s, left 0.4s;
-}
-
-input:checked+.slider:after {
-  content: '🌞';
-  position: absolute;
-  top: 50%;
-  left: calc(100% - 29px);
-  transform: translateY(-50%);
-  font-size: 17px;
-  color: #fff;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .theme-toggle-switch {
-    width: 55px;
-    height: 30px;
-  }
-
-  .slider:before {
-    height: 22px;
-    width: 22px;
-  }
-
-  .slider:after {
-    font-size: 14px;
-    left: 6px;
-  }
-
-  input:checked+.slider:after {
-    left: calc(100% - 25px);
-  }
-}
-
-/* Additional styles for smaller screens */
-@media (max-width: 480px) {
-  .theme-toggle-switch {
-    width: 50px;
-    height: 24px;
-  }
-
-  .slider:before {
-    height: 18px;
-    width: 18px;
-  }
-
-  .slider:after {
-    font-size: 12px;
-    top: 45%;
-    left: 4px;
-  }
-
-  input:checked+.slider:after {
-    font-size: 13px;
-    top: 45%;
-    left: calc(100% - 20px);
-  }
 }

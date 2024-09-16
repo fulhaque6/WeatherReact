@@ -19,7 +19,7 @@ function WeatherData({ weatherData = {}, cityName }) {
           return <i className="fa-solid fa-cloud-sun-rain"></i>;
         return <i className="fa-solid fa-cloud"></i>;
       case "Rain":
-        return <i className="fa-solid fa-raindrops"></i>;
+        return <i className="fa-solid fa-droplet"></i>;
       case "Snow":
         return <i className="fa-solid fa-snowflake"></i>;
       case "Thunderstorm":
