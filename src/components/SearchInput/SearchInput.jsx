@@ -1,3 +1,5 @@
+import './SearchInput.scss';
+
 const SearchInput = ({ inputValue, onChange, onLocationClick }) => (
   <div
     className="bg-light rounded-pill shadow-sm"

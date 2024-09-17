@@ -1,4 +1,5 @@
 import Item from "../Item";
+import './CitiesList.scss';
 
 const CitiesList = ({ citiesList, onItemClick, onWeatherShow }) => {
 

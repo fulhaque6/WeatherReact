@@ -1,0 +1,85 @@
+.input-group-text {
+    background-color: transparent;
+    border: 0;
+}
+
+.light-mode .input-group-text {
+    color: #0288d1;
+}
+
+.dark-mode .input-group-text {
+    color: #ffffff;
+}
+
+.form-control {
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 20px;
+    background-color: #e0f7fa;
+    color: #0288d1;
+}
+
+.light-mode .form-control {
+    background-color: #e0f7fa;
+    color: #0288d1;
+}
+
+.dark-mode .form-control {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.light-mode input::placeholder {
+    color: rgb(68, 144, 225);
+    opacity: 1;
+}
+
+.dark-mode input::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.bi-search .fa-magnifying-glass {
+    color: inherit;
+}
+
+
+.bi-geo-alt .fa-location-dot {
+    color: inherit;
+    cursor: pointer;
+}
+
+.custom-input {
+    border: none;
+    /* Remove the border */
+    box-shadow: none;
+    /* Remove any box-shadow */
+}
+
+.custom-input:focus {
+    outline: none;
+    /* Remove the outline */
+    box-shadow: none;
+    /* Remove the box-shadow on focus */
+}
+
+.light-mode .bg-light {
+    background-color: #e0f7fa !important;
+}
+
+.dark-mode .bg-light {
+    background-color: #333 !important;
+}
+
+@media (max-width: 768px) {
+    .form-control {
+        padding: 8px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-control {
+        padding: 6px 16px;
+    }
+}

@@ -1,34 +1,3 @@
-// Define variables for colors and other reusable values
-$light-grey: #f3f3f3;
-$sky-blue: #007BFF;
-$dark-grey: #333333;
-$lighter-sky-blue: #80bfff;
-$light-bg: rgba(255, 255, 255, 0.8);
-$dark-bg: rgba(0, 0, 0, 0.7);
-$primary-color: #0288d1;
-$dark-mode-color: #e0e0e0;
-
-// Loader styles
-.weather-loader {
-  border: 4px solid $light-grey;
-  border-top: 4px solid $sky-blue;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  margin-right: 8px;
-
-  &.light-mode {
-    border-top: 4px solid $sky-blue;
-  }
-
-  &.dark-mode {
-    border: 4px solid $dark-grey;
-    border-top: 4px solid $lighter-sky-blue;
-  }
-}
-
 .loader {
   position: fixed;
   top: 0;
@@ -40,370 +9,67 @@ $dark-mode-color: #e0e0e0;
   align-items: center;
   z-index: 1000;
   transition: background 0.3s ease;
-
-  &.light-mode {
-    background: $light-bg;
-    backdrop-filter: blur(5px);
-
-    &::before {
-      content: "";
-      width: 50px;
-      height: 50px;
-      border: 5px solid #3498db;
-      border-top: 5px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-  }
-
-  &.dark-mode {
-    background: $dark-bg;
-    color: white;
-    backdrop-filter: blur(5px);
-
-    &::before {
-      content: "";
-      width: 50px;
-      height: 50px;
-      border: 5px solid white;
-      border-top: 5px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-  }
 }
 
-// Keyframes for spin animation
+.light-mode .loader {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.light-mode .loader::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 5px solid #3498db;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.dark-mode .loader {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.dark-mode .loader::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-// Form styles
-.container {
-  margin-top: 6rem;
+.app-container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.input-group-text {
-  background-color: transparent;
-  border: 0;
-}
-
-.custom-input {
-  border: none;
-  box-shadow: none;
-
-  &:focus {
-    outline: none;
-    box-shadow: none;
-  }
-}
-
-.form-control {
-  border: 0;
-  border-radius: 50px;
-  padding: 10px 20px;
-  background-color: #e0f7fa;
-  color: $primary-color;
-}
-
-.list-group {
-  margin-top: 3rem;
-  border-radius: 10px;
-}
-
-.list-group-item {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ddd;
-}
-
-// Light mode styles
-.light-mode {
-  .bg-light {
-    background-color: #e0f7fa !important;
-  }
-
-  .input-group-text {
-    color: $primary-color;
-  }
-
-  .form-control {
-    background-color: #e0f7fa;
-    color: $primary-color;
-  }
-
-  .list-group-item {
-    background-color: #fff;
-    color: #598cf2;
-    border: 1px solid #ddd;
-
-    &:hover {
-      color: white;
-      background-color: rgb(68, 144, 225);
-    }
-  }
-
-  input::placeholder {
-    color: rgb(68, 144, 225);
-    opacity: 1;
-  }
-}
-
-// Dark mode styles
-.dark-mode {
-  input::placeholder {
-    color: white;
-    opacity: 1;
-  }
-
-  .bg-light {
-    background-color: $dark-grey !important;
-  }
-
-  .input-group-text {
-    color: white;
-  }
-
-  .form-control {
-    background-color: $dark-grey;
-    color: white;
-    border: 1px solid white;
-  }
-
-  .list-group-item {
-    background-color: #424242;
-    color: $dark-mode-color;
-    border: 1px solid #616161;
-
-    &:hover {
-      color: white;
-      background-color: $dark-grey;
-    }
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-  .container {
-    margin-top: 4rem;
-  }
-
-  .form-control {
-    padding: 8px 18px;
-  }
-
-  .list-group {
-    margin-top: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    margin-top: 3rem;
-  }
-
-  .form-control {
-    padding: 6px 16px;
-  }
-
-  .list-group {
-    margin-top: 1.5rem;
-  }
-}
-
-// Search container adjustments
-.search-container {
-  width: 100%;
-  max-width: 600px;
-  margin-top: 50px;
-  padding: 0 15px;
-}
-
-// Loading overlay
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: $light-bg;
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
 }
 
-// Developer info component
-.developer-info-container {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-// GitHub link
-.github-link-container {
-  background-color: $light-bg;
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-
-  &:hover {
-    background-color: white;
-    transform: scale(1.1);
-
-    .github-link {
-      color: #0366d6;
-    }
-  }
-
-  .github-link {
-    color: black;
-    font-size: 28px;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-// Dark mode adjustments
-.dark-mode {
-  .App {
-    background-color: #1e1e1e;
-    color: $dark-mode-color;
-  }
-
-  .App-header {
-    background-color: #121212;
-  }
-
-  .card {
-    background: #2c2c2c;
-  }
-
-  .card-title,
-  .card-text {
-    color: $dark-mode-color;
-  }
-
-  .github-link-container {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: $dark-mode-color;
-  }
-
-  .github-link {
-    color: $dark-mode-color;
-  }
-
-  .weather-icon {
-    color: $dark-mode-color;
-  }
-}
-
-// Light mode adjustments
 .light-mode {
   background-image: url('images/bg.jpg');
-
-  .App {
-    background-color: white;
-    color: black;
-  }
-
-  .App-header {
-    background-color: #282c34;
-  }
-
-  .card {
-    background: #f8f9fa;
-  }
-
-  .card-title,
-  .card-text {
-    color: black;
-  }
-
-  .github-link-container {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .github-link {
-    color: black;
-  }
-
-  .weather-icon {
-    color: #ffcc00;
-  }
 }
 
-// Dark mode toggle button styles
-.theme-toggle-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.theme-toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ddd;
-    transition: .4s;
-    border-radius: 34px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    &:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      border-radius: 50%;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    &.dark-mode {
-      background-color: #4a4a4a;
-
-      &:before {
-        transform: translateX(26px);
-      }
-    }
-  }
+.dark-mode {
+  background-image: url('images/bg.png');
 }

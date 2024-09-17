@@ -4,7 +4,7 @@ import { WeatherProvider, useWeather } from "./context/WeatherContext";
 
 import DeveloperInfo from "./components/DeveloperInfo";
 
-import './App.css';
+import './App.scss';
 
 const WeatherData = lazy(() => import("./components/WeatherData"));
 
