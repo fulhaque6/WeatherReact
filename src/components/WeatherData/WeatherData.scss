@@ -1,6 +1,12 @@
 .weather-icon {
+    font-size: 3rem;
+    color: #ffcc00; // Light yellow for the icon
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+
     &.dark-mode {
         background-color: white;
+        color: #e0e0e0; // Adjust if needed
     }
 }
 
@@ -13,31 +19,36 @@
     font-size: 2rem;
 }
 
-.dark-mode .card {
-    background: #2c2c2c;
+.dark-mode {
+    .card {
+        background: #2c2c2c;
+    }
+
+    .card-title,
+    .card-text {
+        color: #e0e0e0;
+    }
+
+    .weather-icon {
+        color: #e0e0e0; // Adjust if needed
+    }
+
+    .weather-loader {
+        border: 4px solid #333333; // Darker grey
+        border-top: 4px solid #80bfff; // Lighter sky-blue shade
+    }
 }
 
-.dark-mode .card-title,
-.dark-mode .card-text {
-    color: #e0e0e0;
-}
-
-.weather-icon {
-    font-size: 3rem;
-    color: #ffcc00;
-    /* Light yellow for the icon */
-    margin-bottom: 1rem;
-    transition: color 0.3s ease;
-}
-
-.dark-mode .weather-icon {
-    color: #e0e0e0;
-    /* Adjust if needed */
+.light-mode {
+    .weather-loader {
+        border: 4px solid #f3f3f3; // Light grey
+        border-top: 4px solid #007BFF; // Sky-blue shade
+    }
 }
 
 .weather-loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #007BFF;
+    border: 4px solid #f3f3f3; // Light grey
+    border-top: 4px solid #007BFF; // Sky-blue shade
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -46,18 +57,12 @@
     margin-right: 8px;
 }
 
-/* Light mode loader */
-.light-mode .weather-loader {
-    border: 4px solid #f3f3f3;
-    /* Light grey */
-    border-top: 4px solid #007BFF;
-    /* Sky-blue shade */
-}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
 
-/* Dark mode loader */
-.dark-mode .weather-loader {
-    border: 4px solid #333333;
-    /* Darker grey */
-    border-top: 4px solid #80bfff;
-    /* Lighter sky-blue shade */
+    100% {
+        transform: rotate(360deg);
+    }
 }
