@@ -1,14 +1,33 @@
+.bg-light {
+    background-color: #e0f7fa !important;
+}
+
+.dark-mode {
+    .bg-light {
+        background-color: #333 !important;
+    }
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
 .input-group-text {
     background-color: transparent;
     border: 0;
-}
+    color: inherit;
 
-.light-mode .input-group-text {
-    color: #0288d1;
-}
+    .light-mode & {
+        color: #0288d1;
+    }
 
-.dark-mode .input-group-text {
-    color: #ffffff;
+    .dark-mode & {
+        color: #ffffff;
+    }
 }
 
 .form-control {
@@ -17,59 +36,41 @@
     padding: 10px 20px;
     background-color: #e0f7fa;
     color: #0288d1;
+    border: 1px solid transparent;
+
+    .light-mode & {
+        background-color: #e0f7fa;
+        color: #0288d1;
+    }
+
+    .dark-mode & {
+        background-color: #333;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+    }
 }
 
-.light-mode .form-control {
-    background-color: #e0f7fa;
-    color: #0288d1;
-}
-
-.dark-mode .form-control {
-    background-color: #333;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-}
-
-.light-mode input::placeholder {
-    color: rgb(68, 144, 225);
-    opacity: 1;
-}
-
-.dark-mode input::placeholder {
-    color: #ffffff;
-    opacity: 1;
-}
-
-.bi-search .fa-magnifying-glass {
-    color: inherit;
-}
-
-
-.bi-geo-alt .fa-location-dot {
-    color: inherit;
-    cursor: pointer;
-}
 
 .custom-input {
     border: none;
-    /* Remove the border */
     box-shadow: none;
-    /* Remove any box-shadow */
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
 
-.custom-input:focus {
-    outline: none;
-    /* Remove the outline */
-    box-shadow: none;
-    /* Remove the box-shadow on focus */
-}
+input::placeholder {
+    opacity: 1;
 
-.light-mode .bg-light {
-    background-color: #e0f7fa !important;
-}
+    .light-mode & {
+        color: rgb(68, 144, 225);
+    }
 
-.dark-mode .bg-light {
-    background-color: #333 !important;
+    .dark-mode & {
+        color: #ffffff;
+    }
 }
 
 @media (max-width: 768px) {
