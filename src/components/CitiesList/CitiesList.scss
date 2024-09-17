@@ -2,22 +2,22 @@
     background-color: #fff;
     color: #598cf2;
     border: 1px solid #ddd;
-}
 
-.light-mode .list-group-item:hover {
-    color: #ffffff;
-    background-color: rgb(68, 144, 225);
+    &:hover {
+        color: #ffffff;
+        background-color: rgb(68, 144, 225);
+    }
 }
 
 .dark-mode .list-group-item {
     background-color: #424242;
     color: #e0e0e0;
     border: 1px solid #616161;
-}
 
-.dark-mode .list-group-item:hover {
-    color: #ffffff;
-    background-color: #333;
+    &:hover {
+        color: #ffffff;
+        background-color: #333;
+    }
 }
 
 @media (max-width: 768px) {
