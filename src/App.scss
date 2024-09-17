@@ -1,57 +1,3 @@
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: background 0.3s ease;
-}
-
-.light-mode .loader {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
-}
-
-.light-mode .loader::before {
-  content: "";
-  width: 50px;
-  height: 50px;
-  border: 5px solid #3498db;
-  border-top: 5px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.dark-mode .loader {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  backdrop-filter: blur(5px);
-}
-
-.dark-mode .loader::before {
-  content: "";
-  width: 50px;
-  height: 50px;
-  border: 5px solid #fff;
-  border-top: 5px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .app-container {
   background-size: cover;
   background-position: center;
@@ -64,12 +10,56 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
 
-.light-mode {
-  background-image: url('images/bg.jpg');
-}
+  &.light-mode {
+    background-image: url('images/bg.jpg');
+  }
 
-.dark-mode {
-  background-image: url('images/bg.png');
+  &.dark-mode {
+    background-image: url('images/bg.png');
+
+    .loader {
+      background: rgba(255, 255, 255, 0.8);
+
+      &::before {
+        border: 5px solid #000000;
+        border-top: 5px solid transparent;
+      }
+    }
+  }
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    transition: background 0.3s ease;
+
+    &::before {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 5px solid #3498db;
+      border-top: 5px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
 }
